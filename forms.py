@@ -4,7 +4,6 @@ from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from models.users import User
 from models import db_session
-import phonenumbers
 
 
 class RegisterForm(FlaskForm):
