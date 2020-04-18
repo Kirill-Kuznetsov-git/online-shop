@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request
 from models import db_session
 import flask_login
+import os
 from flask_login import login_user, logout_user, login_required, current_user
 from models.users import User
 from models.goods import Goods
@@ -254,4 +255,5 @@ def add_goods():
 if __name__ == '__main__':
     db_session.global_init('db/base.sqlite')
     session = db_session.create_session()
-    app.run(port=8080, host='127.0.0.1')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(port=port, host='0.0.0.0')
