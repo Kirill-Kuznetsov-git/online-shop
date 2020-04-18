@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr>
+        <td class="left_column">
+            <h3>{{ goods.name }}</h3>
+            <div>
+                <img src={{ goods.picture }} alt="not found">
+            </div>
+        </td>
+        <td class="right_column">
+            <form method="POST">
+            <div>
+                Категория:<br>
+                {{ goods.category }}</div>
+            <div>
+                 Описание:<br>
+                {{ goods.description }}
+            </div>
+            <br>
+            <div>
+                Цена {{ goods.price }} руб.
+            </div>
+            {% if flag == False %}
+            <input type="hidden" name="index" value={{ goods.id }}>
+            <input type="submit" class="btn_cart" value="В корзину">
+            {% elif flag == True %}
+                        <input type="hidden" name="index_del" value={{ goods.id }}>
+            <input type="submit" class="btn_cart" value="Удалить из корзины">
+            {% endif %}
+                </form>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

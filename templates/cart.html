@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center>
+<div class="products_all">
+<ul class="products clearfix">
+  {% for i in goods %}
+	<li class="product-wrapper">
+        <form method="post" class="form_product">
+		    <div class="card">
+                <img src={{ i.picture }} alt="" style="width:100%">
+                <h1>{{ i.name }}</h1>
+                <a class="title">{{ i.category }}</a>
+                <p>Цена {{ i.price }} руб.</p>
+                <div style="margin: 24px 0;">
+            </div>
+                <div>
+                <input type="hidden" name="index_del" value={{ i.id }}>
+            <input type="submit" class="btn_cart" value="Удалить из корзины">
+            </div>
+            </div>
+        </form>
+	</li>
+  {% endfor %}
+</ul>
+    {% if flag == True %}
+    <div align="center">Ваша корзина пока пуста.</div>
+        <form method="POST">
+    <input type="hidden" name="back_catalog" value='back_catalog'>
+    <input type="submit" class="btn_cart" value="Вернуться в магазин">
+    </form>
+    {% else %}
+        </div>
+    <form method="POST">
+    <input type="hidden" name="orders" value='orders'>
+    <input type="submit" class="btn_cart" value="Сделать заказ">
+    </form>
+    {% endif %}
+
+</center>
+
+{% endblock %}

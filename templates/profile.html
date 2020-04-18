@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form class="profile_form" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <h1 align="center">Профиль</h1>
+    <hr>
+    {% if red == 'save' %}
+    <p align="center">{{ form.save_btn(type="submit", class="btn btn-outline-primary") }}</p>
+    {% else %}
+    <p align="center">{{ form.edit_btn(type="submit", class="btn btn-outline-primary") }}</p>
+    {% endif %}
+    <p class="qwe">
+        {{ form.name.label }}<br>
+        {% if red == 'save' %}
+        <input type="text" value={{ cur_user.name }} id='name' name='name'><br>
+        {% for error in form.name.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {{ cur_user.name }}<br>
+        {% endif %}
+    </p>
+    <p class="qwe">
+        {{ form.surname.label }}<br>
+                {% if red == 'save' %}
+        <input type="text" value={{ cur_user.surname }} id='surname' name='surname'><br>
+        {% for error in form.surname.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {{ cur_user.surname }}<br>
+        {% endif %}
+    </p>
+        <p class="qwe">
+        {{ form.country.label }}<br>
+                {% if red == 'save' %}
+        <input type="text" value={{ cur_user.country }} id='country' name='country'><br>
+            {% for error in form.country.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {{ cur_user.country }}<br>
+        {% endif %}
+    </p>
+        <p class="qwe">
+        {{ form.town.label }}<br>
+                {% if red == 'save' %}
+        <input type="text" value={{ cur_user.town }} id='town' name='town'><br>
+            {% for error in form.town.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {{ cur_user.town }}<br>
+        {% endif %}
+    </p>
+    <p align="center">{{ form.exit_btn(type="submit", class="btn btn-outline-primary") }}</p>
+    {% if admin == True %}
+    <p align="center">{{ form.admin_btn(type="submit", class="btn btn-outline-primary") }}</p>
+    {% endif %}
+</form>
+<center>
+    <ul>
+{% for i in orders %}
+            <li>
+                <form>
+<div class="col-25">
+    <div class="container">
+      <h4>Ваш заказ
+        <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i>
+          <b>№ {{ i[0] }}</b>
+        </span>
+      </h4>
+        {% for j in i[1] %}
+        <p><a href="/profile_goods/{{ j.id }}">{{ j.name }}:</a> <span class="price">{{ j.price }} руб.</span></p>
+        {% endfor %}
+      <p>Итого <span class="price" style="color:black"><b>{{ i[2] }} руб.</b></span></p>
+              <hr>
+    </div>
+  </div>
+                </form>
+            </li>
+{% endfor %}
+    </ul>
+</center>
+{% endblock %}
