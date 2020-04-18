@@ -22,6 +22,7 @@
             <div>
                 Цена {{ goods.price }} руб.
             </div>
+                {% if current_user.is_authenticated %}
             {% if flag == False %}
             <input type="hidden" name="index" value={{ goods.id }}>
             <input type="submit" class="btn_cart" value="В корзину">
@@ -29,6 +30,7 @@
                         <input type="hidden" name="index_del" value={{ goods.id }}>
             <input type="submit" class="btn_cart" value="Удалить из корзины">
             {% endif %}
+                {% endif %}
                 </form>
         </td>
     </tr>

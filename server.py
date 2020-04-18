@@ -202,10 +202,11 @@ def profile_goods(id):
     if request.method == 'GET':
         session = db_session.create_session()
         x = session.query(Goods).filter(Goods.id == id)
-        for i in x:
-            if i.id in current_user.get_cart():
-                return render_template('goods_profile.html', goods=i, flag=True)
-            return render_template('goods_profile.html', goods=i, flag=False)
+        if current_user.is_authenticated:
+            for i in x:
+                if i.id in current_user.get_cart():
+                    return render_template('goods_profile.html', goods=i, flag=True)
+                return render_template('goods_profile.html', goods=i, flag=False)
     elif request.method == 'POST':
         session = db_session.create_session()
         try:
