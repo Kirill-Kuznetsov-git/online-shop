@@ -96,6 +96,7 @@ def catalog(category=0):
 
 @app.route('/profile/<red>', methods=['GET', 'POST'])
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile(red='edit'):
     form = ProfileForm()
     db_session.global_init('db/base.sqlite')
@@ -144,6 +145,7 @@ def profile(red='edit'):
 
 @app.route('/cart/<int:category>', methods=['GET', 'POST'])
 @app.route('/cart', methods=['GET', 'POST'])
+@login_required
 def cart(category=0):
     if request.method == 'GET':
         if category == 0:
@@ -237,15 +239,19 @@ def profile_goods(id):
 
 
 @app.route('/add_goods', methods=['GET', 'POST'])
+@login_required
 def add_goods():
     db_session.global_init('db/base.sqlite')
     session = db_session.create_session()
+    if not current_user.is_admin:
+        return redirect('/')
     form = AddForm()
     if form.validate_on_submit():
+        k = 'Категория №' + str(form.category.data)
         goods = Goods(
             name=form.name.data,
             description=form.description.data,
-            category=form.category.data,
+            category=k,
             picture=form.picture.data,
             price=form.price.data
         )

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<center>
+<div class="products_all">
 <form class="profile_form" action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <h1 align="center">Профиль</h1>
@@ -64,7 +66,9 @@
     </p>
     <p align="center">{{ form.exit_btn(type="submit", class="btn btn-outline-primary") }}</p>
     {% if admin == True %}
-    <p align="center">{{ form.admin_btn(type="submit", class="btn btn-outline-primary") }}</p>
+    <div>Админ панель
+            <hr>
+        <p align="center">{{ form.admin_btn(type="submit", class="btn btn-outline-primary") }}</p></div>
     {% endif %}
 </form>
 <center>
@@ -91,5 +95,7 @@
             </li>
 {% endfor %}
     </ul>
+</center>
+</div>
 </center>
 {% endblock %}

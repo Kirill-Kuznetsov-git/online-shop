@@ -55,9 +55,9 @@ class ProfileForm(FlaskForm):
 class AddForm(FlaskForm):
     name = StringField('Название', validators=[DataRequired()])
     description = TextAreaField('Описание', validators=[DataRequired()])
-    category = SelectField('Категория', validators=[DataRequired()], choices=[('Категория №1', 'Категория №1'),
-                                                                              ('Категория №2', 'Категория №2'),
-                                                                              ('Категория №3', 'Категория №3')], coerce=int)
+    category = SelectField('Категория', validators=[DataRequired()], choices=[(1, 'Категория №1'),
+                                                                              (2, 'Категория №2'),
+                                                                              (3, 'Категория №3')], coerce=int)
     picture = StringField('Путь картинки', validators=[DataRequired()])
     price = IntegerField('Цена', validators=[DataRequired()])
     add_btn = SubmitField('Добавить')
