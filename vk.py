@@ -38,16 +38,22 @@ def main():
                 name = response['response'][0]['first_name']
                 vk.messages.send(user_id=event.obj.message['from_id'],
                                  message=f"Здравствуйте {name}!\nВы можете узнать есть ли товары в наличии, если введете 'Товар:[название товара]'.\n"
-                                         f" Также вы можете узнать какие у вас активные заказы, если введете логин.",
+                                         f" Также вы можете узнать какие у вас активные заказы, если введете логин.\nonline-shop-kirill.herokuapp.com",
                                  random_id=random.randint(0, 2 ** 64))
                 flag = False
-            elif 'Товар' in event.obj.message['text']:
+            elif 'Товар' in event.obj.message['text'] and ':' in event.obj.message['text']:
                 db_session.global_init('db/base.sqlite')
                 session = db_session.create_session()
+                flag = False
                 for i in session.query(Goods).filter(Goods.name == event.obj.message['text'].split(':')[1]):
+                    flag = True
                     vk.messages.send(user_id=event.obj.message['from_id'],
-                                     message=f"Товар есть в наличии."
+                                     message=f"Товар есть в наличии.\n"
                                              f"{i.name}\n{i.category}\n{i.description}\nЦена: {i.price} руб.",
+                                     random_id=random.randint(0, 2 ** 64))
+                if flag is False:
+                    vk.messages.send(user_id=event.obj.message['from_id'],
+                                     message=f"Товар нет в наличии.",
                                      random_id=random.randint(0, 2 ** 64))
             elif '@' in event.obj.message['text']:
                 db_session.global_init('db/base.sqlite')
@@ -63,11 +69,11 @@ def main():
                         q = j.goods.split(';')
                         for o in q:
                             for k in session.query(Goods).filter(Goods.id == int(o)):
-                                res += k.name + ': ' + str(k.price) + '\n'
+                                res += k.name + ': ' + str(k.price) + 'руб.' + '\n'
                                 price_all += int(k.price)
 
                         vk.messages.send(user_id=event.obj.message['from_id'],
-                                         message=f"Заказ №{a}\n{res}Итого: {str(price_all)}.",
+                                         message=f"Заказ №{a}\n{res}Итого: {str(price_all)} руб.",
                                          random_id=random.randint(0, 2 ** 64))
                         a += 1
                     if a == 1:
@@ -81,7 +87,7 @@ def main():
             else:
                 vk.messages.send(user_id=event.obj.message['from_id'],
                                  message=f"Вы можете узнать есть ли товары в наличии, если введете 'Товар:[название товара]'.\n"
-                                         f" Также вы можете узнать какие у вас активные заказы, если введете логин.",
+                                         f" Также вы можете узнать какие у вас активные заказы, если введете логин.\nonline-shop-kirill.herokuapp.com",
                                  random_id=random.randint(0, 2 ** 64))
 
 
