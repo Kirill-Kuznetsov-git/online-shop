@@ -35,12 +35,18 @@
       <ul class="navbar-nav mr-right">
           {% if current_user.is_authenticated %}
                 <li class="nav-item active">
+                    <a class="navbar-link" href="https://vk.com/public193939883"><img src="/static/img/vk_img.png" width="30" height="30" alt="Not found"></a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="/profile">Профиль<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="navbar-link" href="/cart"><img src="/static/img/cart.png" width="30" height="30" alt="Not found"></a>
                 </li>
           {% else %}
+                <li class="nav-item active">
+                    <a class="navbar-link" href="https://vk.com/public193939883"><img src="/static/img/vk_img.png" width="30" height="30" alt="Not found"></a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/login">Войти<span class="sr-only">(current)</span></a>
                 </li>
