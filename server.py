@@ -19,7 +19,7 @@ def load_user(user_id):
     session = db_session.create_session()
     return session.query(User).get(user_id)
 
-
+#авторизация
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -34,7 +34,7 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
-
+#регистрация
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -52,7 +52,7 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
-
+#основная страница
 @app.route('/<int:category>', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def catalog(category=0):
@@ -93,7 +93,7 @@ def catalog(category=0):
             x = session.query(Goods).filter(Goods.category == f'Категория №{category}')
         return render_template('catalog.html', products=x, goods=current_user.get_cart())
 
-
+#профиль пользователя
 @app.route('/profile/<red>', methods=['GET', 'POST'])
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
@@ -142,7 +142,7 @@ def profile(red='edit'):
             r += 1
     return render_template('profile.html', form=form, red=red, cur_user=current_user, orders=orders, admin=current_user.is_admin)
 
-
+#корзина
 @app.route('/cart/<int:category>', methods=['GET', 'POST'])
 @app.route('/cart', methods=['GET', 'POST'])
 @login_required
@@ -198,7 +198,7 @@ def cart(category=0):
         flag = True if t == 0 else False
         return render_template('cart.html', goods=x, flag=flag)
 
-
+#профиль продуктов
 @app.route('/profile_goods/<int:id>', methods=['GET', 'POST'])
 def profile_goods(id):
     if request.method == 'GET':
@@ -237,7 +237,7 @@ def profile_goods(id):
                 return render_template('goods_profile.html', goods=i, flag=True)
             return render_template('goods_profile.html', goods=i, flag=False)
 
-
+#добавление продукта для админа
 @app.route('/add_goods', methods=['GET', 'POST'])
 @login_required
 def add_goods():
