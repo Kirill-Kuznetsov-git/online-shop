@@ -21,6 +21,17 @@ class RegisterForm(FlaskForm):
         if user:
             self.email.errors.append("Пользователь уже зарегистрирован")
             return False
+        if self.password.data.lower() == self.password.data:
+            self.password.errors.append('В пароле должны содерожаться заглавные буквы')
+            return False
+        flag = False
+        for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+            if i in self.password.data:
+                flag = True
+                break
+        if flag is False:
+            self.password.errors.append('В пароле должны содерожаться цифры')
+            return False
         return True
 
 
