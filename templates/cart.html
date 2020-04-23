@@ -23,7 +23,7 @@
 	</li>
   {% endfor %}
 </ul>
-    {% if current_user.is_authenticated %}
+    {% if not current_user.is_authenticated %}
         <div align="center">Авторизируйтесь чтобы воспользоваться коризиной</div>
         <form method="POST">
         <input type="hidden" name="back_catalog" value='back_catalog'>
