@@ -4,6 +4,7 @@
 <center>
 <div class="products_all">
 <ul class="products clearfix">
+    {% if not current_user.is_authenticated %}
   {% for i in goods %}
 	<li class="product-wrapper">
         <form method="post" class="form_product">
@@ -21,6 +22,7 @@
             </div>
         </form>
 	</li>
+    {% endif %}
   {% endfor %}
 </ul>
     {% if not current_user.is_authenticated %}

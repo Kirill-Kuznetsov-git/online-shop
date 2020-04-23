@@ -148,15 +148,18 @@ def profile(red='edit'):
 @login_required
 def cart(category=0):
     if request.method == 'GET':
-        if category == 0:
-            x = session.query(Goods).filter(Goods.id.in_(current_user.get_cart()))
+        if current_user.is_authenticated:
+            if category == 0:
+                x = session.query(Goods).filter(Goods.id.in_(current_user.get_cart()))
+            else:
+                x = session.query(Goods).filter(Goods.id.in_(current_user.get_cart()), Goods.category == f'Категория №{category}')
+            t = 0
+            for _ in x:
+                t += 1
+            flag = True if t == 0 else False
+            return render_template('cart.html', goods=x, flag=flag)
         else:
-            x = session.query(Goods).filter(Goods.id.in_(current_user.get_cart()), Goods.category == f'Категория №{category}')
-        t = 0
-        for _ in x:
-            t += 1
-        flag = True if t == 0 else False
-        return render_template('cart.html', goods=x, flag=flag)
+            return render_template('cart.html')
     elif request.method == 'POST':
         try:
             for goods in session.query(Goods).filter(Goods.id == request.form['index_del']):
