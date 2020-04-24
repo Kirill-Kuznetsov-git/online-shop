@@ -145,7 +145,6 @@ def profile(red='edit'):
 #корзина
 @app.route('/cart/<int:category>', methods=['GET', 'POST'])
 @app.route('/cart', methods=['GET', 'POST'])
-@login_required
 def cart(category=0):
     if request.method == 'GET':
         if current_user.is_authenticated:

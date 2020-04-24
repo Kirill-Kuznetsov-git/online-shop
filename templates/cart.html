@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if current_user.is_authenticated %}
 <center>
 <div class="products_all">
 <ul class="products clearfix">
-    {% if not current_user.is_authenticated %}
   {% for i in goods %}
 	<li class="product-wrapper">
         <form method="post" class="form_product">
@@ -22,16 +22,8 @@
             </div>
         </form>
 	</li>
-    {% endif %}
   {% endfor %}
 </ul>
-    {% if not current_user.is_authenticated %}
-        <div align="center">Авторизируйтесь чтобы воспользоваться коризиной</div>
-        <form method="POST">
-        <input type="hidden" name="back_catalog" value='back_catalog'>
-        <input type="submit" class="btn_cart" value="Вернуться в магазин">
-        </form>
-    {% else %}
     {% if flag == True %}
     <div align="center">Ваша корзина пока пуста.</div>
         <form method="POST">
@@ -39,14 +31,18 @@
     <input type="submit" class="btn_cart" value="Вернуться в магазин">
     </form>
     {% else %}
-        </div>
     <form method="POST">
     <input type="hidden" name="orders" value='orders'>
     <input type="submit" class="btn_cart" value="Сделать заказ">
     </form>
     {% endif %}
-    {% endif %}
-
+</div>
 </center>
-
+{% else %}
+        <div align="center">Авторизируйтесь чтобы воспользоваться коризиной</div>
+        <form method="POST">
+        <input type="hidden" name="back_catalog" value='back_catalog'>
+        <input type="submit" class="btn_cart" value="Вернуться в магазин">
+        </form>
+{% endif %}
 {% endblock %}
