@@ -11,6 +11,7 @@ class User(SqlAlchemyBase, UserMixin):
                            primary_key=True, autoincrement=True)
     email = sqlalchemy.Column(sqlalchemy.String, unique=True)
     cart = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    goods_number = sqlalchemy.Column(sqlalchemy.Integer)
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
     is_admin = sqlalchemy.Column(sqlalchemy.Boolean)
     name = sqlalchemy.Column(sqlalchemy.String)

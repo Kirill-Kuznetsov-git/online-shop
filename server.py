@@ -44,7 +44,8 @@ def reqister():
         user = User(
             email=form.email.data,
             is_admin=False,
-            cart=''
+            cart='',
+            goods_number=0
         )
         user.set_password(form.password.data)
         session.add(user)
@@ -75,6 +76,7 @@ def catalog(category=0):
                     current_user.cart += ';' + str(goods.id)
                 else:
                     current_user.cart = str(goods.id)
+                current_user.goods_number += 1
         except Exception:
             pass
         try:
@@ -83,6 +85,7 @@ def catalog(category=0):
                 del current_user.cart[current_user.cart.index(goods.id)]
             current_user.cart = [str(i) for i in current_user.cart]
             current_user.cart = ';'.join(current_user.cart)
+            current_user.goods_number -= 1
         except Exception:
             pass
         session.merge(current_user)
@@ -166,6 +169,7 @@ def cart(category=0):
                 del current_user.cart[current_user.cart.index(goods.id)]
             current_user.cart = [str(i) for i in current_user.cart]
             current_user.cart = ';'.join(current_user.cart)
+            current_user.goods_number -= 1
         except Exception:
             pass
         try:
@@ -221,6 +225,7 @@ def profile_goods(id):
                     current_user.cart += ';' + str(goods.id)
                 else:
                     current_user.cart = str(goods.id)
+                current_user.goods_number += 1
         except Exception:
             pass
         try:
@@ -229,6 +234,7 @@ def profile_goods(id):
                 del current_user.cart[current_user.cart.index(goods.id)]
             current_user.cart = [str(i) for i in current_user.cart]
             current_user.cart = ';'.join(current_user.cart)
+            current_user.goods_number -= 1
         except Exception:
             pass
         session.merge(current_user)
