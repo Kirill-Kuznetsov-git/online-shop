@@ -12,7 +12,8 @@
                 <img src={{ i.picture }} alt="" style="width:100%">
                 <h1>{{ i.name }}</h1>
                 <a class="title">{{ i.category }}</a>
-                <p>Цена {{ i.price }} руб.</p>
+                <p>Количество: {{ cur_cart[1][loop.index0] }}</p>
+                <p>Цена {{ cur_cart[1][loop.index0] * i.price }} руб.</p>
                 <div style="margin: 24px 0;">
             </div>
                 <div>

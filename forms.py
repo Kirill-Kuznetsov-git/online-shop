@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField, TextAreaField, FileField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from models.users import User
@@ -69,6 +69,6 @@ class AddForm(FlaskForm):
     category = SelectField('Категория', validators=[DataRequired()], choices=[(1, 'Категория №1'),
                                                                               (2, 'Категория №2'),
                                                                               (3, 'Категория №3')], coerce=int)
-    picture = StringField('Путь картинки', validators=[DataRequired()])
+    number = IntegerField('Количество товара', validators=[DataRequired()])
     price = IntegerField('Цена', validators=[DataRequired()])
     add_btn = SubmitField('Добавить')

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form class="add_form" action="" method="post" novalidate>
+<form class="add_form" action="" method="post" novalidate enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <h1 align="center">Добавление товара</h1>
     <hr>
@@ -33,9 +33,14 @@
     {% endfor %}
     </p>
     <p class="qwe">
-        {{ form.picture.label }}<br>
-        {{ form.picture(class="form-control") }}<br>
-        {% for error in form.picture.errors %}
+    <div class="form-group">
+        <input type="file" class="form-control-file" id="photo" name="file">
+    </div>
+    </p>
+    <p class="qwe">
+        {{ form.number.label }}<br>
+        {{ form.number(class="form-control") }}<br>
+        {% for error in form.number.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>

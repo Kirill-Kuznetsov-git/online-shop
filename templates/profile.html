@@ -85,7 +85,7 @@
         </span>
       </h4>
         {% for j in i[1] %}
-        <p><a href="/profile_goods/{{ j.id }}">{{ j.name }}:</a> <span class="price">{{ j.price }} руб.</span></p>
+        <p><a href="/profile_goods/{{ j[0].id }}">{{ j[0].name }}, {{ j[1] }} шт:</a> <span class="price">{{ j[2] }} руб.</span></p>
         {% endfor %}
       <p>Итого <span class="price" style="color:black"><b>{{ i[2] }} руб.</b></span></p>
               <hr>

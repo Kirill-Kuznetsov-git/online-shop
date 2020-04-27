@@ -7,7 +7,7 @@
     <tr>
         <td class="left_column">
             <h3>{{ goods.name }}</h3>
-            <div>
+            <div class="card">
                 <img src={{ goods.picture }} alt="not found">
             </div>
         </td>
@@ -20,6 +20,7 @@
                  Описание:<br>
                 {{ goods.description }}
             </div>
+                <input type="number"  class="number" value="1" min="1" max={{ goods.number }} step="1" name="is_number"/>
             <br>
             <div>
                 Цена {{ goods.price }} руб.

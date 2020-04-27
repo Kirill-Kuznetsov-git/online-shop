@@ -13,10 +13,4 @@ class Goods(SqlAlchemyBase, UserMixin):
     category = sqlalchemy.Column(sqlalchemy.String)
     picture = sqlalchemy.Column(sqlalchemy.String)
     price = sqlalchemy.Column(sqlalchemy.Integer)
-
-    def get_goods(self):
-        if self.goods.split(';')[0] == '':
-            q = []
-        else:
-            q = self.goods.split(';')
-        return [int(i) for i in q]
+    number = sqlalchemy.Column(sqlalchemy.Integer)

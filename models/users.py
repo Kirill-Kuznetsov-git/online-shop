@@ -27,10 +27,15 @@ class User(SqlAlchemyBase, UserMixin):
 
     def get_cart(self):
         if self.cart.split(';')[0] == '':
-            q = []
+            return [[], []]
         else:
-            q = self.cart.split(';')
-        return [int(i) for i in q]
+            x = [[], []]
+            for i in range(len(self.cart.split(';'))):
+                if i % 2 == 0:
+                    x[0].append(int(self.cart.split(';')[i]))
+                else:
+                    x[1].append(int(self.cart.split(';')[i]))
+            return x
 
     def is_authenticated(self):
         return True

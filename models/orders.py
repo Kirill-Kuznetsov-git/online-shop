@@ -10,11 +10,18 @@ class Order(SqlAlchemyBase, UserMixin):
                            primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer)
     goods = sqlalchemy.Column(sqlalchemy.String)
+    number = sqlalchemy.Column(sqlalchemy.Integer)
     price = sqlalchemy.Column(sqlalchemy.Integer)
 
     def get_goods(self):
+        print(2)
         if self.goods.split(';')[0] == '':
-            q = []
+            return [[], []]
         else:
-            q = self.goods.split(';')
-        return [int(i) for i in q]
+            x = [[], []]
+            for i in range(len(self.goods.split(';'))):
+                if i % 2 == 0:
+                    x[0].append(int(self.goods.split(';')[i]))
+                else:
+                    x[1].append(int(self.goods.split(';')[i]))
+            return x
