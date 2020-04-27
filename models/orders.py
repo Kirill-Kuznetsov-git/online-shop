@@ -14,7 +14,6 @@ class Order(SqlAlchemyBase, UserMixin):
     price = sqlalchemy.Column(sqlalchemy.Integer)
 
     def get_goods(self):
-        print(2)
         if self.goods.split(';')[0] == '':
             return [[], []]
         else:

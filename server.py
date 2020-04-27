@@ -148,7 +148,6 @@ def profile(red='edit'):
                 price_all += int(session.query(Goods).filter(Goods.id == int(i.get_goods()[0][j])).first().price) * int(i.get_goods()[1][j])
             orders.append([r, t, price_all])
             r += 1
-    print(orders)
     return render_template('profile.html', form=form, red=red, cur_user=current_user, orders=orders, admin=current_user.is_admin)
 
 #корзина
